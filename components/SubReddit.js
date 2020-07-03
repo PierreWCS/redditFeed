@@ -6,7 +6,6 @@ import Link from "next/link";
 const SubReddit = ({ props }) => {
   const [hoveredPost, setHoveredPost] = useState(null);
 
-  console.log(props.data);
   return (
     <Link href={`../pages/subreddit/${props.data.title}`}>
       <div

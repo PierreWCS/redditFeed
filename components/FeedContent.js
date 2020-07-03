@@ -4,13 +4,6 @@ import SubReddit from "./SubReddit";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const FeedContent = ({ url }) => {
-  const classes = {
-    feedContainer: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-    },
-  };
   const [content, setContent] = useState(null);
   useEffect(() => {
     getContent();
