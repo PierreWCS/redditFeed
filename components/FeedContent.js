@@ -20,7 +20,6 @@ const FeedContent = ({ url }) => {
 
   return (
     <div className="subredditFeedContainer">
-      <h1>Content container</h1>
       {content ? (
         content.map((subreddit, key) => {
           return <SubReddit props={subreddit} key={key} />;
