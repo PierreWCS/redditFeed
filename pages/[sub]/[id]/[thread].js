@@ -1,7 +1,10 @@
 import Head from "next/head";
 
+import ToolBar from "../../../components/ToolBar";
+import Footer from "../../../components/Footer";
+import ThreadContent from "../../../components/ThreadContent";
+
 export default function Thread() {
-  console.log(window.location.params);
   return (
     <div className="container">
       <Head>
@@ -9,8 +12,25 @@ export default function Thread() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>Page title</h1>
+        <ToolBar />
+        <div className="threadContent">
+          <ThreadContent />
+        </div>
+        <Footer />
       </main>
+      <style>
+        {`
+        body {
+          margin: 0;
+          background-color: #dae0e6;
+          font-family: roboto;
+        }
+        .threadContent {
+          display: flex;
+          justify-content: center;
+        }
+`}
+      </style>
     </div>
   );
 }

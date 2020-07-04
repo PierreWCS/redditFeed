@@ -5,16 +5,15 @@ import Link from "next/link";
 
 const SubReddit = ({ props }) => {
   const [hoveredPost, setHoveredPost] = useState(null);
-
+  let address = props.data.permalink.split("/");
   return (
-    <Link href={`../pages/subreddit/${props.data.title}`}>
+    <Link href={`/${address[2]}/${address[4]}/${address[5]}`}>
       <div
         style={
           hoveredPost
             ? {
                 ...classes.subredditContainer,
                 boxShadow: "2px 2px 2px grey",
-                opacity: "0.9",
               }
             : { ...classes.subredditContainer }
         }
@@ -39,8 +38,10 @@ const SubReddit = ({ props }) => {
           </div>
           <div style={classes.postContent}>
             <h4 style={{ margin: "10px 0" }}>{props.data.title}</h4>
-            {props.data.url_overridden_by_dest &&
-            props.data.url_overridden_by_dest.includes(".jpg") ? (
+            {(props.data.url_overridden_by_dest &&
+              props.data.url_overridden_by_dest.includes(".jpg")) ||
+            (props.data.url_overridden_by_dest &&
+              props.data.url_overridden_by_dest.includes(".png")) ? (
               <img
                 style={classes.thumbnail}
                 src={props.data.url_overridden_by_dest}
