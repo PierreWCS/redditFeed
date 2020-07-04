@@ -3,10 +3,10 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { useRouter } from "next/router";
 import ThreadComment from "./ThreadComment";
 import Sort from "./services/Sort";
+import ThreadDetails from "./ThreadDetails";
 
 const ThreadContent = () => {
   const [postContent, setPostContent] = useState(null);
-  const [postComments, setPostComments] = useState(null);
   const [bestComments, setBestComments] = useState(null);
   const router = useRouter();
 
@@ -28,8 +28,9 @@ const ThreadContent = () => {
       .then(
         (json) => {
           setPostContent(json[0].data.children[0].data);
-          setPostComments(json[1].data.children);
-          filterBestComments(json[1].data.children);
+          if (json[1].data.children.length) {
+            filterBestComments(json[1].data.children);
+          } else setBestComments("empty");
         },
         (error) => {
           console.log(error);
@@ -38,88 +39,46 @@ const ThreadContent = () => {
   }
 
   return (
-    <div style={classes.threadContentContainer}>
+    <div className="threadContentContainer">
       {postContent ? (
-        <div>
-          <div style={classes.threadPost}>
-            <div style={classes.scoreContainer}>
-              {postContent.score > 1000 ? (
-                <p>{(postContent.score / 1000).toFixed(1)}k</p>
-              ) : (
-                <p>{postContent.score > 1 ? postContent.score : "."}</p>
-              )}
-            </div>
-            <div style={classes.postContent}>
-              <p>Posted by u/{postContent.author}</p>
-              <p>{postContent.title}</p>
-              {(postContent.url_overridden_by_dest &&
-                postContent.url_overridden_by_dest.includes(".jpg")) ||
-              (postContent.url_overridden_by_dest &&
-                postContent.url_overridden_by_dest.includes(".png")) ? (
-                <img
-                  style={classes.thumbnail}
-                  src={postContent.url_overridden_by_dest}
-                  alt="post image"
-                />
-              ) : null}
-              {postContent.media && postContent.media.reddit_video ? (
-                <video
-                  controls
-                  width="100%"
-                  src={postContent.media.reddit_video.fallback_url}
-                />
-              ) : null}
-            </div>
-          </div>
-          <div style={classes.commentsContainer}>
-            {bestComments ? (
-              bestComments.map((comment, key) => {
-                return <ThreadComment key={key} comment={comment.data} />;
-              })
-            ) : (
-              <CircularProgress style={{ margin: "50px 0" }} />
-            )}
-          </div>
-        </div>
+        <ThreadDetails thread={postContent} />
       ) : (
         <CircularProgress style={{ margin: "50px 0" }} />
       )}
+      {bestComments && bestComments !== "empty"
+        ? bestComments.map((comment, key) => {
+            return <ThreadComment key={key} comment={comment.data} />;
+          })
+        : null}
+      {bestComments === "empty" ? (
+        <p style={classes.noComments}>No comments</p>
+      ) : null}
+      <style jsx>
+        {`
+          .threadContentContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 60%;
+          }
+          @media (max-width: 1060px) {
+            .threadContentContainer {
+              width: 90%;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };
 
 const classes = {
-  threadContentContainer: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: "60%",
-  },
-  threadPost: {
-    display: "flex",
-    backgroundColor: "white",
-    margin: "25px 0",
-    minHeight: "250px",
-    borderRadius: "3px",
-  },
-  scoreContainer: {
-    backgroundColor: "#f8f9fa",
-    width: "50px",
-    fontWeight: "bold",
+  noComments: {
+    width: "100%",
     textAlign: "center",
-  },
-  postContent: {
-    display: "flex",
-    flexDirection: "column",
-    padding: "0 10px 10px 10px",
-  },
-  thumbnail: {
-    width: "60%",
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-  commentsContainer: {
-    margin: "0 0 50px 0",
+    fontFamily: "roboto",
+    padding: "25px 0",
+    backgroundColor: "white",
   },
 };
 

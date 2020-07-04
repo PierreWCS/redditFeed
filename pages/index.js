@@ -27,12 +27,11 @@ export default function Home() {
           font-family: roboto;
         }
         h1 {
-          width: 50%;
+          width: 100%;
           padding: 15px;
           box-sizing: border-box;
           background-color: white;
-          margin-left: auto;
-          margin-right: auto;
+          text-align: center;
         }
       `}</style>
     </div>

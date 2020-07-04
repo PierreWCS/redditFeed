@@ -51,7 +51,7 @@ const SubReddit = ({ props }) => {
             {props.data.media && props.data.media.reddit_video ? (
               <video
                 controls
-                width="100%"
+                height="80%"
                 src={props.data.media.reddit_video.fallback_url}
               />
             ) : null}
@@ -117,9 +117,11 @@ const classes = {
     display: "flex",
     flexDirection: "column",
     margin: "15px 0",
+    maxHeight: "500px",
   },
   thumbnail: {
-    width: "60%",
+    height: "90%",
+    maxWidth: "100%",
     marginLeft: "auto",
     marginRight: "auto",
   },
