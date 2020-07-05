@@ -39,12 +39,17 @@ const ToolBar = () => {
       });
   };
 
-  const userLeftInput = function () {
-    // I needed to create this function because onBlur event causes infinite loop with anonymous function
-    if (inputFocus) {
-      setInterval(() => {
+  const userInputInteract = function (action) {
+    // Show propositions on input focus
+    switch (action) {
+      case "in": {
+        setInputFocus(true);
+        break;
+      }
+      case "out": {
         setInputFocus(false);
-      }, 500);
+        break;
+      }
     }
   };
 
@@ -79,14 +84,8 @@ const ToolBar = () => {
           {/*   Sub input  */}
           <div style={classes.inputContainerDesktop}>
             <TextField
-              onBlur={userLeftInput}
-              onFocus={() => setInputFocus(true)}
-              onKeyPress={(ev) => {
-                if (ev.key === "Enter") {
-                  ev.preventDefault();
-                  userSubPropositions();
-                }
-              }}
+              onBlur={() => userInputInteract("out")}
+              onFocus={() => userInputInteract("in")}
               className="textField"
               onChange={(event) => {
                 setUserSearch(event.target.value);
@@ -115,13 +114,6 @@ const ToolBar = () => {
                 )}
               </div>
             ) : null}
-            <IconButton
-              onClick={userSubPropositions}
-              color="primary"
-              aria-label="add to shopping cart"
-            >
-              <SearchIcon />
-            </IconButton>
           </div>
         </div>
       </Toolbar>
@@ -148,7 +140,7 @@ const classes = {
   propositionsContainer: {
     position: "absolute",
     top: "65px",
-    width: "230px",
+    width: "180px",
     backgroundColor: "rgba(250,250,250, 1)",
     padding: "15px 5px",
     boxSizing: "border-box",
