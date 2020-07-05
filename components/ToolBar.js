@@ -47,7 +47,9 @@ const ToolBar = () => {
         break;
       }
       case "out": {
-        setInputFocus(false);
+        setInterval(() => {
+          setInputFocus(false);
+        }, 500);
         break;
       }
     }
@@ -110,7 +112,7 @@ const ToolBar = () => {
                     );
                   })
                 ) : (
-                  <p>No result</p>
+                  <p style={{ color: "black" }}>No result</p>
                 )}
               </div>
             ) : null}

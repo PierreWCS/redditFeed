@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import SubReddit from "./SubReddit";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const FeedContent = ({ url }) => {
   const [content, setContent] = useState(null);
+  const [contentDisplayed, setContentDisplayed] = useState(10);
+
   useEffect(() => {
     getContent();
   }, []);
@@ -14,6 +17,7 @@ const FeedContent = ({ url }) => {
       method: "get",
       url: url,
     }).then((result) => {
+      console.log(result.data.data.children.length);
       setContent(result.data.data.children);
     });
   }
@@ -21,9 +25,20 @@ const FeedContent = ({ url }) => {
   return (
     <div className="subredditFeedContainer">
       {content ? (
-        content.map((subreddit, key) => {
-          return <SubReddit props={subreddit} key={key} />;
-        })
+        <InfiniteScroll
+          dataLength={contentDisplayed}
+          next={() => setContentDisplayed(contentDisplayed + 10)}
+          hasMore={true}
+          loader={
+            <CircularProgress style={{ margin: "50px auto 50px auto" }} />
+          }
+        >
+          {content.map((subreddit, key) => {
+            if (key < contentDisplayed) {
+              return <SubReddit key={key} props={subreddit} />;
+            }
+          })}
+        </InfiniteScroll>
       ) : (
         <CircularProgress style={{ margin: "50px 0" }} />
       )}
