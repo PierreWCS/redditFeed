@@ -14,7 +14,7 @@ export default function New() {
         <ToolBar />
         <h1>Discover the latest subreddits</h1>
         <div className="contentContainer">
-          <FeedContent url="https://www.reddit.com/r/popular/new.json?limit=50" />
+          <FeedContent url="https://www.reddit.com/r/popular/new.json?limit=100" />
         </div>
       </main>
       <Footer />

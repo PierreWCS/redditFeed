@@ -34,6 +34,7 @@ const FeedContent = ({ url }) => {
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
           }
 
           @media (max-width: 1060px) {

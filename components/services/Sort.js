@@ -18,7 +18,7 @@ export default {
         currentBestScore = 0;
         sortedData.push(data[currentBestIndex]);
         data.splice(currentBestIndex, 1);
-      }
+      } else return sortedData;
     }
     return sortedData;
   },

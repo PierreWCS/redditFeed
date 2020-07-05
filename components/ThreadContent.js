@@ -43,7 +43,7 @@ const ThreadContent = () => {
       {postContent ? (
         <ThreadDetails thread={postContent} />
       ) : (
-        <CircularProgress style={{ margin: "50px 0" }} />
+        <CircularProgress style={{ margin: "auto auto auto auto" }} />
       )}
       {bestComments && bestComments !== "empty"
         ? bestComments.map((comment, key) => {
@@ -59,7 +59,8 @@ const ThreadContent = () => {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 60%;
+            width: 50%;
+            min-height: 100vh;
           }
           @media (max-width: 1060px) {
             .threadContentContainer {

@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import Time from "./services/Time";
+import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 
 const SubReddit = ({ props }) => {
   const [hoveredPost, setHoveredPost] = useState(null);
   let address = props.data.permalink.split("/");
+  let threadDate = Time.timestampToDate(props.data.created_utc);
+  let threadTime = Time.timestampToTime(props.data.created_utc);
+
   return (
     <Link href={`/${address[2]}/${address[4]}/${address[5]}`}>
       <div
@@ -21,11 +26,17 @@ const SubReddit = ({ props }) => {
         onMouseLeave={() => setHoveredPost(false)}
       >
         <div style={classes.scoreContainer}>
+          <ArrowDropUpIcon />
           {props.data.score > 1000 ? (
-            <p>{(props.data.score / 1000).toFixed(1)}k</p>
+            <p style={{ margin: "0" }}>
+              {(props.data.score / 1000).toFixed(1)}k
+            </p>
           ) : (
-            <p>{props.data.score > 1 ? props.data.score : "."}</p>
+            <p style={{ margin: "0" }}>
+              {props.data.score > 1 ? props.data.score : "."}
+            </p>
           )}
+          <ArrowDropDownIcon />
         </div>
         <div style={classes.contentContainer}>
           <div style={classes.postInfo}>
@@ -33,7 +44,13 @@ const SubReddit = ({ props }) => {
               r/{props.data.subreddit}
             </p>
             <p style={{ margin: "5px 0 0 5px", color: "grey" }}>
-              Posted by u/{props.data.author}
+              Posted by{" "}
+              <span style={{ fontWeight: "bold", color: "black" }}>
+                u/{props.data.author}
+              </span>
+            </p>
+            <p style={{ margin: "5px 0 0 15px", color: "grey" }}>
+              {threadDate} at {threadTime}
             </p>
           </div>
           <div style={classes.postContent}>
@@ -50,18 +67,15 @@ const SubReddit = ({ props }) => {
             ) : null}
             {props.data.media && props.data.media.reddit_video ? (
               <video
+                style={classes.video}
                 controls
-                height="80%"
                 src={props.data.media.reddit_video.fallback_url}
               />
             ) : null}
           </div>
 
           <div style={classes.commentsContainer}>
-            <FontAwesomeIcon
-              icon={faComments}
-              style={{ height: "20px", marginRight: "5px" }}
-            />
+            <ChatBubbleIcon style={{ marginRight: "5px", fontSize: "16px" }} />
             {props.data.num_comments > 1000 ? (
               <p style={{ margin: "0" }}>
                 {(props.data.num_comments / 1000).toFixed(1)}k Comments
@@ -86,12 +100,15 @@ const classes = {
     letterSpacing: "0.5px",
     borderRadius: "3px",
     width: "100%",
+    maxHeight: "550px",
     cursor: "pointer",
   },
   contentContainer: {
     display: "flex",
     width: "100%",
     flexDirection: "column",
+    justifyContent: "space-between",
+    height: "100%",
     padding: "10px",
     boxSizing: "border-box",
   },
@@ -99,14 +116,15 @@ const classes = {
     display: "flex",
     width: "100%",
     justifyContent: "flex-start",
+    alignItems: "center",
     fontSize: "12px",
     flexWrap: "wrap",
   },
   scoreContainer: {
     backgroundColor: "#F8F9FA",
+    paddingTop: "5px",
     textAlign: "center",
-    fontWeight: "bold",
-    width: "50px",
+    width: "70px",
   },
   commentsContainer: {
     display: "flex",
@@ -115,15 +133,21 @@ const classes = {
   },
   postContent: {
     display: "flex",
+    maxHeight: "90%",
+    width: "100%",
     flexDirection: "column",
+    boxSizing: "border-box",
     margin: "15px 0",
-    maxHeight: "500px",
   },
   thumbnail: {
-    height: "90%",
-    maxWidth: "100%",
+    maxWidth: "80%",
+    maxHeight: "350px",
     marginLeft: "auto",
     marginRight: "auto",
+  },
+  video: {
+    maxHeight: "350px",
+    maxWidth: "100%",
   },
 };
 

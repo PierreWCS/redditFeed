@@ -1,16 +1,17 @@
 import Head from "next/head";
-import ToolBar from "../../../components/ToolBar";
-import Footer from "../../../components/Footer";
-import ThreadContent from "../../../components/ThreadContent";
+import Footer from "../../components/Footer";
+import ToolBar from "../../components/ToolBar";
 import { useRouter } from "next/router";
+import FeedContent from "../../components/FeedContent";
 
-export default function Thread() {
+export default function Sub() {
   const router = useRouter();
+
   return (
     <div className="container">
       <Head>
-        {router.query.thread ? (
-          <title>{router.query.thread.replace(/_/g, " ")}</title>
+        {router.query.sub ? (
+          <title>{router.query.sub}</title>
         ) : (
           <title>Reddit thread</title>
         )}
@@ -19,7 +20,11 @@ export default function Thread() {
       <main>
         <ToolBar />
         <div className="threadContent">
-          <ThreadContent />
+          {router.query.sub && (
+            <FeedContent
+              url={`https://www.reddit.com/r/${router.query.sub}.json?limit=100`}
+            />
+          )}
         </div>
         <Footer />
       </main>

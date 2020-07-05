@@ -15,7 +15,7 @@ export default function Home() {
         <ToolBar />
         <h1>Most popular subreddits</h1>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <FeedContent url="https://www.reddit.com/r/popular.json?limit=50" />
+          <FeedContent url="https://www.reddit.com/r/popular.json?limit=100" />
         </div>
       </main>
 
