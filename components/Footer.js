@@ -7,7 +7,7 @@ const Footer = () => {
         style={classes.link}
         rel="noopener noreferrer"
         target="_blank"
-        href="https://github.com/PierreWCS/feedReddit"
+        href="https://github.com/PierreWCS/redditFeed"
       >
         Code available here
       </a>
