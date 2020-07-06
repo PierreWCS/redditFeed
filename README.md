@@ -1,6 +1,10 @@
-# Reddit feed app using Next.JS.
+# Reddit feed app using Next.JS
 
-With React, Next.JS and Material UI
+With React, Next.JS and Material UI.
+
+I used lazyload for the feed:
+
+see [this library](https://www.npmjs.com/package/react-infinite-scroll-component)
 
 ## Installation
 
