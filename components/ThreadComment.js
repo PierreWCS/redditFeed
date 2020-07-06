@@ -80,7 +80,7 @@ const classes = {
     alignItems: "center",
   },
   commentContent: {
-    width: "100%",
+    width: "90%",
     padding: "5px",
   },
   commentText: {

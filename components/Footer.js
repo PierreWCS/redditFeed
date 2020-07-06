@@ -17,7 +17,7 @@ const Footer = () => {
 
 const classes = {
   footerContainer: {
-    backgroundColor: "#34495e",
+    backgroundColor: "#EEEEEE",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

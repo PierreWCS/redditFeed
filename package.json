@@ -21,5 +21,8 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-infinite-scroll-component": "^5.0.5"
+  },
+  "devDependencies": {
+    "prop-types": "^15.7.2"
   }
 }

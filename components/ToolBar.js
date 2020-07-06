@@ -61,24 +61,14 @@ const ToolBar = () => {
         <div style={classes.itemToolbar}>
           <Link href="/">
             <Button
+              size="large"
               style={
                 router && router.pathname === "/"
                   ? { borderBottom: "solid 2px orange" }
                   : null
               }
             >
-              Hot
-            </Button>
-          </Link>
-          <Link href="/new">
-            <Button
-              style={
-                router && router.pathname === "/new"
-                  ? { borderBottom: "solid 2px orange" }
-                  : null
-              }
-            >
-              New
+              Popular
             </Button>
           </Link>
         </div>
@@ -151,6 +141,7 @@ const classes = {
     boxShadow: "1px 1px 1px grey",
     borderRadius: "3px",
     fontFamily: "roboto",
+    zIndex: "4",
   },
   propositionLink: {
     color: "black",

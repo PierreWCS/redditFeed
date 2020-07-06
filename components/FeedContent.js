@@ -17,7 +17,6 @@ const FeedContent = ({ url }) => {
       method: "get",
       url: url,
     }).then((result) => {
-      console.log(result.data.data.children.length);
       setContent(result.data.data.children);
     });
   }

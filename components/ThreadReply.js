@@ -55,7 +55,7 @@ const classes = {
   },
   scoreContainer: {
     backgroundColor: "#f8f9fa",
-    minWidth: "50px",
+    minWidth: "35px",
     textAlign: "center",
     fontSize: "12px",
     paddingTop: "5px",

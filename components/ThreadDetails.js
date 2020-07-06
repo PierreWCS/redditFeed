@@ -34,11 +34,11 @@ const ThreadDetails = ({ thread }) => {
         </div>
 
         <p>{thread.title}</p>
-        <p style={{ color: "blue", textDecoration: "underline" }}>
-          {thread.selftext
-            ? thread.selftext.split("(").pop().split(")")[0]
-            : null}
-        </p>
+        {thread.selftext ? (
+          <p style={classes.postLink}>
+            {thread.selftext.split("(").pop().split(")")[0]}
+          </p>
+        ) : null}
         {(thread.url_overridden_by_dest &&
           thread.url_overridden_by_dest.includes(".jpg")) ||
         (thread.url_overridden_by_dest &&
@@ -93,6 +93,13 @@ const classes = {
     maxWidth: "100%",
     marginLeft: "auto",
     marginRight: "auto",
+  },
+  postLink: {
+    width: "80%",
+    color: "blue",
+    textDecoration: "underline",
+    wordWrap: "break-word",
+    whiteSpace: "pre-line",
   },
 };
 
