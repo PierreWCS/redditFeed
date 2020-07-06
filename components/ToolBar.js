@@ -68,7 +68,7 @@ const ToolBar = () => {
                   : null
               }
             >
-              Popular
+              Home
             </Button>
           </Link>
         </div>
