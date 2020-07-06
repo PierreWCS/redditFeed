@@ -6,6 +6,8 @@ I used lazyload for the feed:
 
 see [this library](https://www.npmjs.com/package/react-infinite-scroll-component)
 
+## Demo here: https://nextreddit.herokuapp.com/
+
 ## Installation
 
 clone the repo
