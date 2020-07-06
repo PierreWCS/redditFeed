@@ -4,7 +4,7 @@ With React, Next.JS and Material UI.
 
 I used lazyload for the feed:
 
-[https://www.npmjs.com/package/react-infinite-scroll-component]
+see [this library](https://www.npmjs.com/package/react-infinite-scroll-component)
 
 ## Installation
 
